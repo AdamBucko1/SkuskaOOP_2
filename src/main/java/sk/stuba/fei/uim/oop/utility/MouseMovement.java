@@ -20,26 +20,35 @@ public class MouseMovement extends MouseAdapter {
         startY=e.getY();
         System.out.println(startX);
         if (controller.getShapeSelected()==1||controller.getShapeSelected()==2){
-        newShape=controller.createNewShape(startX,startY,endX,endY);}
+        newShape=controller.createNewShape(startX,startY,startX,startY);
+        controller.allShapes.add(newShape);
+        }
     }
     @Override
     public void mouseDragged(MouseEvent e) {
         endX = e.getX();
         endY = e.getY();
         if (controller.getShapeSelected() == 1 || controller.getShapeSelected() == 2) {
-            newShape.x = startX;
-            newShape.y = startY;
-            if (newShape instanceof Line){
+
+            //newShape.x = startX;
+           // newShape.y = startY;
+
+           // if (newShape instanceof Line){
             newShape.endX = endX;
-            newShape.endY = endY;}
-            else if (newShape instanceof Circle){
-                controller.recountMyCoordinates(newShape);
+            newShape.endY = endY;
+
+           /* else*/ if (newShape instanceof Circle){
+              controller.recountMyCoordinates(newShape,startX,startY);
             }
-
-            controller.allShapes.add(newShape);
-
             controller.myCanvas.repaint();
             System.out.println("end   " + endX);
+            System.out.println("SIZE "+controller.allShapes.size());
         }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //controller.allShapes.add(newShape);
+        controller.myCanvas.repaint();
     }
 }

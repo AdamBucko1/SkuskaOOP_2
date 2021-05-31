@@ -2,6 +2,8 @@ package sk.stuba.fei.uim.oop.utility;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.abs;
+
 public class Controller {
     public MyCanvas myCanvas=new MyCanvas(this);
     public ArrayList<Shapes> allShapes=new ArrayList<>();
@@ -25,32 +27,39 @@ public class Controller {
         }
 
     }
-    public void recountMyCoordinates(Shapes circle){
-         int startX=circle.x;
-         int startY=circle.y;
+    public void recountMyCoordinates(Shapes circle,int startX, int startY){
+         //KLIK SURADNICE
+        // int startX=startX;
+        // int startY=startY;
+         //DRAG SURADNICE
          int endX=circle.endX;
          int endY=circle.endY;
 
-         if (endX>startX&&endY>startY){
-             if (endX-startX>endY-startY){
-                 endY=endY+(endX-startX)-(endY-startY);
-                 endY=endY-startY;
-                 endX=endY;
-                 circle.x=startX;
-                 circle.y=startY;
-                 circle.endX=endX;
-                 circle.endY=endY;
-             }
+         int width;
+         int length;
 
+         width=abs(startX-endX);
+         length=abs(startY-endY);
+         if (width>length){
+             width=length;
          }
-    }
+        else {
+            length=width;
+         }
+        if (startX>endX){
+            circle.x=startX-width;
+        }
+        if (startY>endY){
+            circle.y=startY-length;
+        }
 
-    /*public void modifyLastShape(int x,int y, int endX, int endY){
-        lastShapeCreated.x=x;
-        lastShapeCreated.y=y;
-        lastShapeCreated.endX=endX;
-        lastShapeCreated.endY=endY;
-    }*/
+        circle.endX=width;
+        circle.endY=length;
+
+
+
+
+    }
 
     public int getShapeSelected() {
         return shapeSelected;
