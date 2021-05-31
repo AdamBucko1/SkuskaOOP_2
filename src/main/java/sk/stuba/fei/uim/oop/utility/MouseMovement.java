@@ -23,6 +23,9 @@ public class MouseMovement extends MouseAdapter {
         newShape=controller.createNewShape(startX,startY,startX,startY);
         controller.allShapes.add(newShape);
         }
+        if (controller.getShapeSelected()==0){
+            controller.selectShape(startX,startY);
+        }
     }
     @Override
     public void mouseDragged(MouseEvent e) {

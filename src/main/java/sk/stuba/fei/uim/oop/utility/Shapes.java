@@ -6,4 +6,5 @@ public class Shapes {
    protected int endX;
    protected int endY;
    protected int shapeType;
+   protected int colourOfObject;
 }
